@@ -28,6 +28,10 @@ int perp2d = front;
 
 static Volume* head = NULL;
 
+
+
+
+
 void Update() {
 	glutPostRedisplay();
 }
@@ -77,7 +81,7 @@ void Draw() {
 			break;
 
 			case ray2d:
-				
+							
 				for(int y = 0; y < head->GetHeight(); y++)
 	  				for(int z = 0; z < head->GetDepth(); z++) {
 		  				// Starting at front
@@ -85,7 +89,8 @@ void Draw() {
 		  				float dist = 1;
 		  				r = g = b = 0;
 		  				bool draw = true;
-
+						float total = 0;
+						Vector3 divides = Vector3(0.2,0.28,0.37);
 						for (int x = 0; x < head->GetWidth(); x++) {
 							
 			        		unsigned char val = head->Get(x, y, z);
@@ -94,28 +99,26 @@ void Draw() {
 			        		// b is dense skull 160
 
 			        		// New alpha = Current Alpha + (1-Current Alpha) * Accumulated Alpha
-					        if(alpha > 0.1 && alpha < 0.3)
+					        if(alpha > divides[0] && alpha < divides[1])
 					        {
 					        	r = r + (1-r)*alpha;
 					        }
 					      		
-					        if(alpha > 0.3 && alpha < 0.6)
+					        if(alpha > divides[1] && alpha < divides[2])
 					        {
 					        	g = g + (1-g)*alpha;
 					        }
 
-					        if(alpha > 0.61 )
+					        if(alpha > divides[2] )
 					        {
 
 					        	b = b + (1-b)*alpha;
 					        }
-					        
+						if(alpha > 0.05)
+					        	total = alpha + (1-alpha)*total;
 					        
 					        dist = (float)x/(float)head->GetWidth();
-					        if(r>0.9||g>1||b>1) break;
-
-
-								
+					        if(total > 0.99) break;	
 							
 
 
@@ -136,7 +139,7 @@ void Draw() {
 							break;
 
 							case all:
-								glColor3f(r,0,b);
+								glColor3f(r/1.75f,0,b);
 							break;
 						}
 						
