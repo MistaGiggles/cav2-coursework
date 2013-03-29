@@ -16,12 +16,19 @@ Running
 To run the program use `./cav2`.
 
 
-Structure
----------
+Interactions
+------------
+F1 : Display dead as in the given Demo
+	Left Arrow to cycles through front, side and to perspectives
+	Up/Down to modify threshold value
 
-Place all source files in `src`.
-Place all header files in `include`.
+F2 : 2d Ray trace of head
+	Red is used to show less dense material
+	Blue is denser material
+	
+	F9 : View mixture
+	F10 : View 'soft' red
+	F11 : View intermediate green
+	F12 : View 'hard' Blue
 
-These will ensure they are compiled by the Makefile.
 
-Feel free to edit any of the provided files to add methods or functionality.
